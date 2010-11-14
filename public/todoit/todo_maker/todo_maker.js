@@ -5,8 +5,7 @@ steal.plugins('jquery/controller',
 		/* @static */
 		{
 			defaults: {
-				watermark : 'Make a todo...',
-				id : 'todo_maker'
+				watermark : 'Make a todo...'
 			}
 		},
 		
@@ -14,7 +13,19 @@ steal.plugins('jquery/controller',
 		{
 			init: function(){
 				this.element.html(this.view(this.options));
-			}
+			},
+			
+			'form submit': function(el, ev){
+				
+				ev.preventDefault();
+				
+				var todo = this.find('input[type=text]').val();
+				
+				if (todo !== Todoit.todoMaker.defaults.watermark){
+					steal.dev.log('Making a todo: "' + todo + '"');
+					el.trigger("todo", todo);
+				}
+			} 
 		}	
 	)
 });
