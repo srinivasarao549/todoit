@@ -13,6 +13,7 @@ steal.css('todo_maker')
 		/* @prototype */
 		{
 			init: function(){
+				
 				this.element.html(this.view(this.options));
 				this.find('input[type=text]').addClass('inactive');
 			},
@@ -30,23 +31,24 @@ steal.css('todo_maker')
 			},
 			
 			'form input[type=text] focus': function(el, ev){
+				
 				this.toggleFocus(el, true);
 			},
 			
 			'form input[type=text] blur': function(el, ev){
+				
 				this.toggleFocus(el, false);
 			},
 			
 			toggleFocus: function(el, focused){
-				el.removeClass();
+			
+				var state = focused ? 'active' : 'inactive';
 				
-				el.toggleClass(function(){
-					if (focused){
-						return 'active';
-					} else {
-						return 'inactive';
-					}
-				})
+				if (el.val() === Todoit.todoMaker.defaults.watermark){
+			
+					el.removeClass();
+					el.addClass(state);
+				}
 				
 			}
 		}	
