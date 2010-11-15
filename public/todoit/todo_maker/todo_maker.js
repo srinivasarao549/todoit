@@ -18,15 +18,22 @@ steal.css('todo_maker')
 				this.find('input[type=text]').addClass('inactive');
 			},
 			
+			/**
+			 * Prevent browser submit behavior and publish an event with the
+			 * text of a new `todo`.  Then reset the input to the default watermark text.
+			 */
 			'form submit': function(el, ev){
 				
 				ev.preventDefault();
 				
-				var todo = this.find('input[type=text]').val();
+				var todo = this.text();
 				
 				if (todo !== Todoit.todoMaker.defaults.watermark){
 					steal.dev.log('Making a todo: "' + todo + '"');
+					
 					el.trigger("todo", todo);
+					this.text(Todoit.todoMaker.defaults.watermark);
+					this.input().blur();
 				}
 			},
 			
@@ -40,6 +47,40 @@ steal.css('todo_maker')
 				this.toggleFocus(el, false);
 			},
 			
+			/**
+			 * Get or update the text of the input.
+			 */
+			text: function(newText){
+			
+				if (!newText){
+					return this.input().val();
+				}
+				
+				this.input().val(newText);
+			},
+			
+			/**
+			 * Find, cache, and return the input element.
+			 */
+			input: function(){
+			
+				if (!this._input){
+					this._input = this.find('input[type=text]');
+				}
+				
+				return this._input;
+			},
+			
+			/**
+			 * If the text input is focused, give it the `active` class.
+			 * If blurred, give it `inactive`.
+			 * 
+			 * Also remove unnecessary classes as needed.
+			 *
+			 * @param {Object} el The element to modify.
+			 * @param {Boolean} focused Whether the element is focused or blurred.
+			 
+			 */
 			toggleFocus: function(el, focused){
 			
 				var state = focused ? 'active' : 'inactive';
