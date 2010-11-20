@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+            "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+	<head>
+		<title>todo_list</title>
+        <style type='text/css'>
+            body {font-family: verdana}
+            .error {border: solid 1px red;}
+            .error_text { color: red; font-size: 10px;}
+            td {padding: 3px;}
+        </style>
+	</head>
+	<body>
+		
+		<ul>
+			<li>
+				Prepend text:
+				<input id="prependTxt" type="text" />
+				<button id="prependBtn">Insert</button>
+			</li>
+			<li>
+				Append text:
+				<input id="appendTxt" type="text" />
+				<button id="appendBtn">Insert</button>
+			</li>
+			<li>
+				Insert text:
+				<input id="insertTxt" type="text" />
+				at index:
+				<input id="insertIndex" type="text" />
+				<button id="insertBtn">Insert</button>
+			</li>
+		</ul>
+		
+		<div id="aList"></div>
+		
+		<script type='text/javascript' 
+                src='../../steal/steal.js?todoit/todo_list,development'>   
+        </script>
+
+
+		<script type="text/javascript">
+			$(function(){
+				var list = $('#aList').todoit_todo_list();
+				
+				$('#prependBtn').click(function(){
+					list.todoit_todo_list('prepend', $('#prependTxt').val() );
+				});
+				
+				$('#appendBtn').click(function(){
+					list.todoit_todo_list('append', $('#appendTxt').val() );
+				});
+				
+			});
+		</script>
+	</body>
+</html>
