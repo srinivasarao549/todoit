@@ -19,34 +19,35 @@ steal
 			},
 			
 			prepend: function(todo){
-				return this.insertAt(this._createTodo(todo), { 
-						index: 0,
-						at: 'before'
-					});
+				return this.insertAt(this._createTodo(todo), 0);
 			},
 			
 			append: function(todo){
-				return this.insertAt(this._createTodo(todo), {
-						index: this._list.length,
-						at: 'after'
-					});
+				return this.insertAt(this._createTodo(todo), this._list.length);
 			},
 			
-			insertAt: function(todo, options){
-				// CURRENTLY NOT WORKING
-				index = options.index ? options.index : 0;
+			insertAt: function(todo, index){
 				
+				// Force the index to a valid value
+				index = index || 0;
+				
+				// If the list has contents, insert `todo`.
+				// Otherwise just append it to the list.
 				if (this._list.length){
-					if (options.at !== 'after'){
-						todo = $(todo).insertBefore(this._list[index]);
+					// If `index` is the equal to or greater than the size of the list, 
+					// just insert it after the end of the last element.
+					// Otherwise insert it before the current element at `index`
+					if(index >= this._list.length){
+						todo = $(todo).insertAfter(this._list[this._list.length - 1]);
 					} else {
-						todo = $(todo).insertAfter(this._list[index]);
+						todo = $(todo).insertBefore(this._list[index]);
 					}
 					
 				} else {
 					todo = $(todo).appendTo(this.element);
 				}
 				
+				// `todo` is now in the DOM, add it to the internal list
 				this._list.splice(index, 0, todo);
 				return this._list;
 			},
