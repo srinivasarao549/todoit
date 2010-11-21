@@ -18,15 +18,17 @@ steal
 				this.element.html(this.view(this.options));
 			},
 			
-			prepend: function(todo){
-				return this.insertAt(this._createTodo(todo), 0);
+			prepend: function(todoText){
+				return this.insertAt(todoText, 0);
 			},
 			
-			append: function(todo){
-				return this.insertAt(this._createTodo(todo), this._list.length);
+			append: function(todoText){
+				return this.insertAt(todoText, this._list.length);
 			},
 			
-			insertAt: function(todo, index){
+			insertAt: function(todoText, index){
+				// Convert `todoText` into a usable todo 
+				var todo = this._createTodo( { text : todoText} );
 				
 				// Force the index to a valid value
 				index = index || 0;
@@ -44,7 +46,7 @@ steal
 					}
 					
 				} else {
-					todo = $(todo).appendTo(this.element);
+					todo = $(todo).appendTo(this.element.find('ol'));
 				}
 				
 				// `todo` is now in the DOM, add it to the internal list
@@ -53,7 +55,7 @@ steal
 			},
 			
 			getTodo: function(index){
-				return this._list[index];
+				return this._list[index] ? this._list[index] : null;
 			},
 			
 			deleteTodo: function(){
@@ -61,10 +63,12 @@ steal
 			},
 			
 			_createTodo: function(params){
+				// If a todo controller has been specified, return a new instance of it in an LI
+				// Otherwise just return a new LI element with params.text.
 				if ($.trim(this.options.todoController) !== ''){
 					return $('<li>')[this.options.todoController](params);
 				} else {
-					return $('<li>').html(params.toString());
+					return $('<li>').html(params.text.toString());
 				}
 				
 			}

@@ -30,6 +30,12 @@
 				<input id="insertIndex" type="text" />
 				<button id="insertBtn">Insert</button>
 			</li>
+			<li>
+				Get todo (index):
+				<input id="getIndex" type="text" />
+				<button id="getBtn">Get</button>
+				<span id="getOutput"><span>
+			</li>
 		</ul>
 		
 		<div id="aList"></div>
@@ -44,11 +50,20 @@
 				var list = $('#aList').todoit_todo_list();
 				
 				$('#prependBtn').click(function(){
-					list.todoit_todo_list('prepend', $('#prependTxt').val() );
+					list.todoit_todo_list( 'prepend', $('#prependTxt').val() );
 				});
 				
 				$('#appendBtn').click(function(){
-					list.todoit_todo_list('append', $('#appendTxt').val() );
+					list.todoit_todo_list( 'append', $('#appendTxt').val() );
+				});
+				
+				$('#insertBtn').click(function(){
+					list.todoit_todo_list( 'insertAt', $('#insertTxt').val(), +$('#insertIndex').val() - 1 );
+				});
+				
+				$('#getBtn').click(function(){
+					var todoText = list.todoit_todo_list().controller().getTodo( +$('#getIndex').val() - 1 );
+					$('#getOutput').html( '--&gt; ' + todoText.html() );
 				});
 				
 			});
