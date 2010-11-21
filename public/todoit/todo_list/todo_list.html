@@ -36,6 +36,16 @@
 				<button id="getBtn">Get</button>
 				<span id="getOutput"><span>
 			</li>
+			<li>
+				Remove todo (index):
+				<input id="removeIndex" type="text" />
+				<button id="removeBtn">Remove</button>
+			</li>
+			<li>
+				Remove todos (index list, comma separated):
+				<input id="removeIndexes" type="text" />
+				<button id="removeIndexesBtn">Remove</button>
+			</li>
 		</ul>
 		
 		<div id="aList"></div>
@@ -63,7 +73,21 @@
 				
 				$('#getBtn').click(function(){
 					var todoText = list.todoit_todo_list().controller().getTodo( +$('#getIndex').val() - 1 );
-					$('#getOutput').html( '--&gt; ' + todoText.html() );
+					$('#getOutput').html( '--&gt; ' + ( todoText && todoText.html() || 'Not found!') );
+				});
+				
+				$('#removeBtn').click(function(){
+					list.todoit_todo_list('removeTodo', +$('#removeIndex').val() - 1);
+				});
+				
+				$('#removeIndexesBtn').click(function(){
+					var i, indexes = $('#removeIndexes').val().split(',');
+					
+					for (i = 0; i < indexes.length; i++){
+						indexes[i] = +$.trim(indexes[i]) - 1;
+					}
+					
+					console.log(list.todoit_todo_list().controller().removeTodos(indexes));
 				});
 				
 			});
