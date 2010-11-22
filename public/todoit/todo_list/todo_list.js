@@ -55,13 +55,13 @@ steal
 				// If the list has contents, insert `todo`.
 				// Otherwise just append it to the list.
 				if (this._list.length){
-					// If `index` is the equal to or greater than the size of the list, 
-					// just insert it after the end of the last element.
-					// Otherwise insert it before the current element at `index`
-					if(index >= this._list.length){
-						todo = $(todo).insertAfter(this._list[this._list.length - 1]);
-					} else {
+					// If `index` is the less than the size of the list, 
+					// insert it before the current element at `index`.
+					// Otherwise insert it after the last element in the list
+					if(index < this._list.length){
 						todo = $(todo).insertBefore(this._list[index]);
+					} else {
+						todo = $(todo).insertAfter(this._list[this._list.length - 1]);
 					}
 					
 				} else {
