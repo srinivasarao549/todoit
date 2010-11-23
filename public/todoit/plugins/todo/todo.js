@@ -6,7 +6,10 @@ steal.css('todo')
 		/* @static */
 		{
 			defaults: {
-				text : 'A todo...'
+				text : 'A todo...',
+				views : {
+					init: '../../plugins/todo/views/init'
+				}
 			}
 		},
 		
@@ -14,7 +17,7 @@ steal.css('todo')
 		{
 			init: function(){
 				
-				this.element.html(this.view(this.options));
+				this.element.html(this.view(this.options.views.init, this.options));
 			},
 			
 			'.text click': function(el, ev){
@@ -67,9 +70,9 @@ steal.css('todo')
 			update: function(){
 				
 				this.text(this.input.val());
-				this.initialEl.html(this.text())
+				this.initialEl.html(this.text());
 				this.input.replaceWith(this.initialEl);
 			}
 		}	
-	)
+	);
 });

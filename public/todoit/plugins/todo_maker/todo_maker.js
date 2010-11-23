@@ -6,7 +6,10 @@ steal.css('todo_maker')
 		/* @static */
 		{
 			defaults: {
-				watermark : 'Make a todo...'
+				watermark : 'Make a todo...',
+				views : {
+					init: '../../plugins/todo_maker/views/init'
+				}
 			}
 		},
 		
@@ -14,7 +17,7 @@ steal.css('todo_maker')
 		{
 			init: function(){
 				
-				this.element.html(this.view(this.options));
+				this.element.html(this.view(this.options.views.init, this.options));
 				this.find('input[type=text]').addClass('inactive');
 			},
 			

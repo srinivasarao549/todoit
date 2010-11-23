@@ -7,7 +7,10 @@ steal
 		/* @static */
 		{
 			defaults: {
-				todoController: ''
+				todoController: '',
+				views : {
+					init: '../../plugins/todo_list/views/init'
+				}
 			}
 		}, 
 		/* @prototype */
@@ -15,7 +18,7 @@ steal
 			init: function(){
 				this._list = [];
 				
-				this.element.html(this.view(this.options));
+				this.element.html(this.view(this.options.views.init, this.options));
 			},
 			
 			/** 
