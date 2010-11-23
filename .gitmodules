@@ -1,0 +1,3 @@
+[submodule "public/jquery"]
+	path = public/jquery
+	url = git@github.com:jupiterjs/jquerymx.git
