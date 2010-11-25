@@ -19,7 +19,7 @@ steal
 			},
 			
 			/** 
-			 * Create a `todo` from `todoText and add it to the beginning of the list
+			 * Create a `todo` from `todoText` and add it to the beginning of the list
 			 *
 			 * @param {String} todoText The text of the new `todo`
 			 * @return {Object} The DOM-inserted `todo` Object
