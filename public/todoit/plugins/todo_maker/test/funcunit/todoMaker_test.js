@@ -1,6 +1,6 @@
 module("todoMaker test", { 
 	setup: function(){
-		S.open("//todoit/todo_maker/todo_maker.html");
+		S.open("//todoit/plugins/todo_maker/todo_maker.html");
 	}
 });
 
