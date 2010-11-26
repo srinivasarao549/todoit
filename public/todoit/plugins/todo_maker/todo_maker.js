@@ -1,7 +1,8 @@
 steal.css('todo_maker')
 	.plugins('jquery/controller',
 	'jquery/dom/form_params',
-	'jquery/view/ejs').then(function($){
+	'jquery/view/ejs',
+	'jquery/controller/view').then(function($){
 	$.Controller.extend('Todoit.todoMaker', 
 		/* @static */
 		{

@@ -2,7 +2,8 @@ steal
 	.css('todo_list')
 	.plugins('jquery/controller',
 	'jquery/dom/form_params',
-	'jquery/view/ejs').then(function($){
+	'jquery/view/ejs',
+	'jquery/controller/view').then(function($){
 		$.Controller.extend('Todoit.todoList', 
 		/* @static */
 		{
