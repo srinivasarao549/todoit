@@ -60,7 +60,7 @@ steal.css('todo')
 			 */
 			keyhandle: function(ev){
 				
-				if (ev.keyCode === '13'){
+				if (ev.keyCode == '13'){
 					this.update();
 				}
 			},
