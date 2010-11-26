@@ -60,7 +60,7 @@ steal.css('todo_maker')
 					return this.input().val();
 				}
 				
-				this.input().val(newText);
+				return this.input().val(newText);
 			},
 			
 			/**
@@ -97,5 +97,5 @@ steal.css('todo_maker')
 				
 			}
 		}	
-	)
+	);
 });

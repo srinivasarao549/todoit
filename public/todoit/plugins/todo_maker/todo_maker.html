@@ -19,7 +19,15 @@
         </script>
 
 		<script type="text/javascript">
-			$('#todoMakerContainer').todoit_todo_maker();
+			$('#todoMakerContainer')
+				.todoit_todo_maker()
+				.bind('todo', function(){
+					
+					$('<div>')
+						.addClass('output')
+						.html($('input').val())
+						.appendTo('body');
+				});
 		</script>
 	</body>
 </html>
