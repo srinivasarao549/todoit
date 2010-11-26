@@ -43,12 +43,21 @@ steal.css('todo_maker')
 			
 			'form input[type=text] focus': function(el, ev){
 				
-				this.toggleFocus(el, true);
+				this._toggleFocus(el, true);
+				
+				if (el.val() === Todoit.todoMaker.defaults.watermark){
+					el.val('');
+				}
+				
 			},
 			
 			'form input[type=text] blur': function(el, ev){
 				
-				this.toggleFocus(el, false);
+				if ($.trim(el.val()) === ''){
+					el.val(Todoit.todoMaker.defaults.watermark);
+				}
+				
+				this._toggleFocus(el, false);
 			},
 			
 			/**
@@ -85,7 +94,7 @@ steal.css('todo_maker')
 			 * @param {Boolean} focused Whether the element is focused or blurred.
 			 
 			 */
-			toggleFocus: function(el, focused){
+			_toggleFocus: function(el, focused){
 			
 				var state = focused ? 'active' : 'inactive';
 				
@@ -94,7 +103,6 @@ steal.css('todo_maker')
 					el.removeClass();
 					el.addClass(state);
 				}
-				
 			}
 		}	
 	);

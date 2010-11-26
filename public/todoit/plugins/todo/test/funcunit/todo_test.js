@@ -23,6 +23,6 @@ test('Click to edit', function() {
 		
 	S(sel.input).type('Hello!\r', function(){
 		ok( S(sel.span).size(), 'The input is gone!' );
-		ok( /Hello!/.test(S(sel.span).text()), 'The text "Hello!" has been saved.' )
+		ok( /Hello!/.test(S(sel.span).text()), 'The text "Hello!" has been saved' );
 	});
 });
