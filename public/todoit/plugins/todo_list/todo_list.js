@@ -8,7 +8,6 @@ steal
 		/* @static */
 		{
 			defaults: {
-				todoController: '',
 				views : {
 					init: '../../plugins/todo_list/views/init'
 				}
@@ -25,33 +24,34 @@ steal
 			/** 
 			 * Create a `todo` from `todoText` and add it to the beginning of the list
 			 *
-			 * @param {String} todoText The text of the new `todo`
+			 * @param {String} todo The `todo` instance to add
 			 * @return {Object} The DOM-inserted `todo` Object
 			 */
-			prepend: function(todoText){
-				return this.insertAt(todoText, 0);
+			prepend: function(todo){
+				return this.insertAt(todo, 0);
 			},
 			
 			/** 
 			 * Create a `todo` from `todoText and add it to the end of the list
 			 *
-			 * @param {String} todoText The text of the new `todo`
+			 * @param {String} todo The `todo` instance to add
 			 * @return {Object} The DOM-inserted `todo` Object
 			 */
-			append: function(todoText){
-				return this.insertAt(todoText, this._list.length);
+			append: function(todo){
+				return this.insertAt(todo, this._list.length);
 			},
 			
 			/** 
 			 * Create a `todo` from `todoText and insert it at the specified `index` of the list
 			 *
-			 * @param {String} todoText The text of the new `todo`
+			 * @param {Object|String} todo The `todo` instance or text of a new list item
 			 * @param {Number} index The index at which to insert the `todo`.
 			 * @return {Object} The DOM inserted `todo` Object
 			 */
-			insertAt: function(todoText, index){
-				// Convert `todoText` into a usable todo 
-				var todo = this._createTodo( { text : todoText} );
+			insertAt: function(todo, index){
+				
+				// Create an LI from `todo` so it can be inserted to (and tested) on the DOM.
+				todo = $('<li>').html(todo);
 				
 				// Force the index to a valid value
 				index = index || 0;
@@ -118,27 +118,6 @@ steal
 				});
 				
 				return removedTodos.reverse();
-			},
-			
-			/**
-			 * @hide
-			 *
-			 * Create a `todo` controller object.  If a controller was not specified in the `options`, create a new `LI` instead. 
-			 * 
-			 * @param {Object} param The parameters to pass to the `todo` controller, if one was specified.  If a controller was not specified in the `option`s, `params.text` becomes the text for the new `LI`. 
-			 * @return {Object} The new `todo` object.  It is not in the DOM.
-			 */
-			_createTodo: function(params){
-				params.text = params.text || '';
-				
-				// If a todo controller has been specified, return a new instance of it in an LI
-				// Otherwise just return a new LI element with params.text as the contents.
-				if ($.trim(this.options.todoController) !== ''){
-					return $('<li>')[this.options.todoController](params);
-				} else {
-					return $('<li>').html(params.text.toString());
-				}
-				
 			}
 		});
 });

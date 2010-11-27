@@ -7,6 +7,7 @@ steal.css('todo_maker')
 		/* @static */
 		{
 			defaults: {
+				todoController: '',
 				watermark : 'Make a todo...',
 				views : {
 					init: '../../plugins/todo_maker/views/init'
@@ -28,14 +29,18 @@ steal.css('todo_maker')
 			 */
 			'form submit': function(el, ev){
 				
+				var todoText = this.text();
+				
 				ev.preventDefault();
 				
-				var todo = this.text();
-				
-				if (todo !== Todoit.todoMaker.defaults.watermark){
-					steal.dev.log('Making a todo: "' + todo + '"');
+				if (todoText !== Todoit.todoMaker.defaults.watermark){
+					steal.dev.log('Making a todo: "' + todoText + '"');
 					
-					el.trigger("todo", todo);
+					//el.trigger("todo", todo);
+					el.trigger("todo", this._createTodo({
+						text : todoText
+					}));
+					
 					this.text(Todoit.todoMaker.defaults.watermark);
 					this.input().blur();
 				}
@@ -103,6 +108,27 @@ steal.css('todo_maker')
 					el.removeClass();
 					el.addClass(state);
 				}
+			},
+			
+			/**
+			 * @hide
+			 *
+			 * Create a `todo` controller object.  If a controller was not specified in the `options`, create a new `LI` instead. 
+			 * 
+			 * @param {Object} param The parameters to pass to the `todo` controller, if one was specified.  If a controller was not specified in the `option`s, `params.text` becomes the text for the new `LI`. 
+			 * @return {Object} The new `todo` object.  It is not in the DOM.
+			 */
+			_createTodo: function(params){
+				params.text = params.text || '';
+				
+				// If a todo controller has been specified, return a new instance of it in an LI
+				// Otherwise just return a new LI element with params.text as the contents.
+				if ($.trim(this.options.todoController) !== ''){
+					return $('<div>')[this.options.todoController](params);
+				} else {
+					return $('<div>').html(params.text.toString());
+				}
+				
 			}
 		}	
 	);
