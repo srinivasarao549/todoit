@@ -1,3 +1,3 @@
 steal
  .plugins("funcunit")
- .then("todoMaker_test");
+ .then("todo_maker_test");
