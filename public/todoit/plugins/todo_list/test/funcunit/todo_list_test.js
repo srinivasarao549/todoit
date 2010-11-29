@@ -1,4 +1,4 @@
-steal.plugins('funcunit').then(function(){
+(function(){
 	module("todo_list test", { 
 		setup: function(){
 			S.open("//todoit/plugins/todo_list/todo_list.html");
@@ -96,4 +96,4 @@ steal.plugins('funcunit').then(function(){
 		});
 	
 	});
-});
+})();

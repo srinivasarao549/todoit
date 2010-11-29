@@ -1,4 +1,4 @@
-steal.plugins('funcunit').then(function(){
+(function(){
 	module("todo test", { 
 		setup: function(){
 			S.open("//todoit/plugins/todo/todo.html");
@@ -23,4 +23,4 @@ steal.plugins('funcunit').then(function(){
 			ok( /Hello!/.test(S(sel.span).text()), 'The text "Hello!" has been saved' );
 		});
 	});
-});
+})();

@@ -1,4 +1,4 @@
-steal.plugins('funcunit').then(function(){
+(function(){
 	module("todoMaker test", { 
 		setup: function(){
 			S.open("//todoit/plugins/todo_maker/todo_maker.html");
@@ -30,4 +30,4 @@ steal.plugins('funcunit').then(function(){
 			ok( /A todo!/.test(S(sel.output).text()), 'A todo was created!');
 		});
 	});
-});
+})();
